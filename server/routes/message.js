@@ -5,11 +5,7 @@ const messageController = require('../controllers/message.controller');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  res.send('respond with a resource');
-});
-
-router.get('/butt', (req, res, next) => {
-  res.send('hello!');
+  res.status(400).send('not implemented yet');
 });
 
 router.post('/', messageController.add);
