@@ -5,8 +5,12 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const routes = require('./server/routes');
 
+const authService = require('./server/services/auth.service');
+
 const app = express();
 
+
+app.all('*', authService.validateToken);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(cors());
