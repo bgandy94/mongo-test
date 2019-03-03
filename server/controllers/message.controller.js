@@ -8,7 +8,7 @@ module.exports = {
       await messageService.add(req.body);
       res.send('success!');
     } catch (e) {
-      throw e;
+      next(e);
     }
   },
   read: async (req, res) => {

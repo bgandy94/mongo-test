@@ -7,6 +7,9 @@ module.exports = {
     if (options._limit) {
       query.limit(+options._limit);
     }
+    if (options._startDate) {
+      query.gt('createdAt', options._startDate);
+    }
     return query;
   },
 };

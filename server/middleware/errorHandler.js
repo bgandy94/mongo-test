@@ -1,6 +1,6 @@
 const { isCelebrate } = require('celebrate');
 
-module.exports = (err, req, res) => {
+module.exports = (err, req, res, next) => { //eslint-disable-line
   if (isCelebrate(err)) {
     return res.status(400).send('invalid data');
   }
