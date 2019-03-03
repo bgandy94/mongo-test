@@ -3,7 +3,7 @@ const userService = require('../services/user.service');
 
 
 module.exports = {
-  register: async (req, res) => {
+  register: async (req, res, next) => {
     const userObject = req.body;
 
     try {
@@ -11,7 +11,7 @@ module.exports = {
 
       await userService.add(userObject);
     } catch (e) {
-      return res.status(500).send('an error occurred.');
+      return next(e);
     }
 
     return res.send({ success: true, message: 'registration successful!' });
