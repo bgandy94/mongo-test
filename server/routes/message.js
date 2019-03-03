@@ -8,7 +8,6 @@ const messageController = require('../controllers/message.controller');
 router.get('/', celebrate({
   body: Joi.object().keys({
     test: Joi.string(),
-    userId: Joi.string(),
   }),
 }, { presence: 'required' }), messageController.read);
 

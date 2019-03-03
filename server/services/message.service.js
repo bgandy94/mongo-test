@@ -5,7 +5,7 @@ module.exports = {
   read: async (filter, options) => {
     const query = Message.find(filter);
     if (options._limit) {
-      query.limit(options._limit);
+      query.limit(+options._limit);
     }
     return query;
   },

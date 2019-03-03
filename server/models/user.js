@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
   },
-});
+}, { timestamps: true });
 
 userSchema.pre('remove', (next) => {
   this.model('Message').deleteMany({ user: this._id }, next); //eslint-disable-line

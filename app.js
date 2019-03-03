@@ -5,6 +5,7 @@ const logger = require('morgan');
 const routes = require('./server/routes');
 
 const errorHandler = require('./server/middleware/errorHandler');
+const queryOptionsHelper = require('./server/middleware/queryOptionsHelper');
 const authService = require('./server/services/auth.service');
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.get('*', queryOptionsHelper);
 
 routes(app);
 app.use(errorHandler);

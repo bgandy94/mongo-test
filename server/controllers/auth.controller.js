@@ -14,7 +14,7 @@ module.exports = {
       return res.status(500).send('an error occurred.');
     }
 
-    return res.send('test');
+    return res.send({ success: true, message: 'registration successful!' });
   },
   login: async (req, res, next) => {
     const { username, password } = req.body;
@@ -22,7 +22,7 @@ module.exports = {
     const user = await userService.findByUsername(username);
 
     if (!user) {
-      return res.status(401);
+      return res.status(401).send('no user found');
     }
 
     try {
