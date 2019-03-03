@@ -1,5 +1,6 @@
-const { celebrate, Joi, errors } = require('celebrate');
+const { celebrate, Joi } = require('celebrate');
 const express = require('express');
+
 const router = express.Router();
 
 const authController = require('../controllers/auth.controller');
@@ -9,8 +10,8 @@ router.post('/register', celebrate({
   body: Joi.object().keys({
     username: Joi.string(),
     name: Joi.string(),
-    password: Joi.string()
-  })
+    password: Joi.string(),
+  }),
 }, { presence: 'required' }), authController.register);
 
 router.post('/login', celebrate({
@@ -18,6 +19,6 @@ router.post('/login', celebrate({
     username: Joi.string(),
     password: Joi.string(),
   }),
-}), authController.login);
+}, { presence: 'required' }), authController.login);
 
 module.exports = router;

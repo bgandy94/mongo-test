@@ -25,14 +25,14 @@ module.exports = {
       throw e;
     }
   },
-  generateToken: async (body) => jwt.sign(body, config.tokenSecret, { expiresIn: config.tokenExpirationPeriod }),
+  generateToken: async body => jwt.sign(body, config.tokenSecret,
+    { expiresIn: config.tokenExpirationPeriod }),
   validateToken: async (req, res, next) => {
-
     if (req.path.indexOf('auth') >= 0) {
       return next();
     }
 
-    let token = req.headers['authorization'];
+    let token = req.headers.authorization;
     let results;
     if (!token) {
       return res.status(401).send('no token provided');
@@ -45,11 +45,10 @@ module.exports = {
       if (token) {
         results = await jwt.verify(token, config.tokenSecret);
       }
-
     } catch (e) {
       return res.status(403).send({ success: false, message: 'auth error' });
     }
-    req.userInfo = { id: results.id, username: results.username, name: results.name}
-    next();
+    req.userInfo = { id: results.id, username: results.username, name: results.name };
+    return next();
   },
 };

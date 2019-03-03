@@ -1,12 +1,16 @@
+const { celebrate, Joi } = require('celebrate');
 const express = require('express');
+
 const router = express.Router();
 
 const messageController = require('../controllers/message.controller');
 
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-  res.status(400).send('not implemented yet');
-});
+router.get('/', celebrate({
+  body: Joi.object().keys({
+    test: Joi.string(),
+    userId: Joi.string(),
+  }),
+}, { presence: 'required' }), messageController.read);
 
 router.post('/', messageController.add);
 

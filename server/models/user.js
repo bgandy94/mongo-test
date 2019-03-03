@@ -6,23 +6,17 @@ const userSchema = new mongoose.Schema({
   },
   username: {
     type: String,
-    unique: true
+    unique: true,
   },
   password: {
-    type: String
+    type: String,
   },
 });
 
-userSchema.statics.findByLogin = async (login) => {
-  let user = await this.findOne({
-    username: login,
-  })
-}
-
 userSchema.pre('remove', (next) => {
-  this.model('Message').deleteMany({ user: this._id }, next);
+  this.model('Message').deleteMany({ user: this._id }, next); //eslint-disable-line
 });
 
 const User = mongoose.model('User', userSchema);
 
-module.exports = User; 
+module.exports = User;
